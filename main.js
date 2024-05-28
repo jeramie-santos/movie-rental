@@ -14,8 +14,14 @@ function Movies (title, director, genre, isAvailable) {
     this.isAvailable = isAvailable;
 }
 
-const movieTable = document.querySelector("#movie-table");
+const movieTable = document.querySelector("#table-movie");
+const btnAddMovie = document.querySelector(".btn.add-movie");
+const dialogMovie = document.querySelector(".dialog.movie");
+const formMovie = document.querySelector("#form-movie")
+const dialogSubmit = document.querySelector(".dialog-submit");
+const dialogClose = document.querySelector(".dialog-close");
 
+//
 const movieRow = document.createElement("tr");
 
 const movieTitle = document.createElement("td");
@@ -36,6 +42,19 @@ movieRow.appendChild(movieGenre);
 movieRow.appendChild(movieIsAvailable);
 
 movieTable.appendChild(movieRow);
+//
+
+btnAddMovie.addEventListener("click", () => {
+    dialogMovie.showModal();
+});
+
+dialogClose.addEventListener("click", () => {
+    dialogMovie.close();
+});
+
+formMovie.addEventListener("submit", (event) => {
+    event.preventDefault();
+});
 
 
 

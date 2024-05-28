@@ -13,9 +13,32 @@
         <h1>Logo</h1>
       </header>
       <main>
+        <dialog class="dialog movie">
+          <form id="form-movie">
+            <div>
+              <label for="movie-title">Title</label>
+              <input type="text" name="movie-title" id="movie-title" />
+            </div>
+            <div>
+              <label for="movie-director">Director</label>
+              <input type="text" name="movie-director" id="movie-director" />
+            </div>
+            <div>
+              <label for="movie-genre">Genre</label>
+              <input type="text" name="movie-genre" id="movie-genre" />
+            </div>
+            <div>
+              <button type="submit" class="btn dialog-submit">Submit</button>
+              <button class="btn dialog-close">Close</button>
+            </div>
+          </form>
+        </dialog>
         <div class="movies-list">
-          <h2>Movie List</h2>
-          <table id="movie-table">
+          <div class="movie-header">
+            <h2>Movie List</h2>
+            <button class="btn add-movie">Add a movie</button>
+          </div>
+          <table id="table-movie">
             <tr>
               <th>Title</th>
               <th>Director</th>
