@@ -7,7 +7,7 @@ const movieList = [
     }
 ];
 
-function Movies (title, director, genre, isAvailable) {
+function Movie (title, director, genre, isAvailable) {
     this.title = title;
     this.director = director;
     this.genre = genre;
@@ -48,13 +48,26 @@ btnAddMovie.addEventListener("click", () => {
     dialogMovie.showModal();
 });
 
-dialogClose.addEventListener("click", () => {
-    dialogMovie.close();
-});
 
 formMovie.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    const title = document.querySelector("#movie-title").value;
+    const director = document.querySelector("#movie-director").value;
+    const genre = document.querySelector("#movie-genre").value;
+
+    if (title && director && genre) {
+        movieList.push(new Movie(title, director, genre, true))
+    }
+
+    formMovie.reset();
+    dialogMovie.close();
 });
 
+dialogClose.addEventListener("click", () => {
+    formMovie.reset();
+    dialogMovie.close();
+
+});
 
 
