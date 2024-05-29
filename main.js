@@ -1,10 +1,10 @@
 const movieList = [
-    {
-        title: "Avengers Endgame",
-        director: "Russo Brothers",
-        genre: "Action, Sci-fi",
-        isAvailable: true,
-    }
+    // {
+    //     title: "Avengers Endgame",
+    //     director: "Russo Brothers",
+    //     genre: "Action, Sci-fi",
+    //     isAvailable: true,
+    // }
 ];
 
 function Movie (title, director, genre, isAvailable) {
@@ -13,6 +13,10 @@ function Movie (title, director, genre, isAvailable) {
     this.genre = genre;
     this.isAvailable = isAvailable;
 }
+
+Movie.prototype.toggleAvailability = function() {
+    return this.isAvailable = !this.isAvailable;
+};
 
 const movieTable = document.querySelector("#table-movie");
 const btnAddMovie = document.querySelector(".btn.add-movie");
@@ -35,7 +39,7 @@ formMovie.addEventListener("submit", (event) => {
 
     if (title && director && genre) {
         movieList.push(new Movie(title, director, genre, true));
-        displayMovies(movieList[movieList.length - 1]);
+        displayMovies(movieList[movieList.length - 1], movieList.length - 1);
     }
 
     formMovie.reset();
@@ -48,8 +52,7 @@ dialogClose.addEventListener("click", () => {
 
 });
 
-
-function displayMovies(movieAdded) {
+function displayMovies(movieAdded, index) {
     const movieRow = document.createElement("tr");
 
     const movieTitle = document.createElement("td");
@@ -63,16 +66,20 @@ function displayMovies(movieAdded) {
 
     const movieIsAvailable = document.createElement("td");
     movieIsAvailable.textContent = movieAdded.isAvailable;
+    movieIsAvailable.className = "availability";
 
+    movieIsAvailable.addEventListener("click", function() {
+        movieIsAvailable.textContent = movieAdded.toggleAvailability();
+    });
+    
     movieRow.appendChild(movieTitle);
     movieRow.appendChild(movieDirector);
     movieRow.appendChild(movieGenre);
     movieRow.appendChild(movieIsAvailable);
 
     movieTable.appendChild(movieRow);
-    console.table(movieList);
 }
 
-movieList.forEach(movie => {
-    displayMovies(movie);
+movieList.forEach((movie, index) => {
+    displayMovies(movie, index);
 });
