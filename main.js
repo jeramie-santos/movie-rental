@@ -1,10 +1,10 @@
 const movieList = [
-    // {
-    //     title: "Avengers Endgame",
-    //     director: "Russo Brothers",
-    //     genre: "Action, Sci-fi",
-    //     isAvailable: true,
-    // }
+    {
+        title: "Avengers Endgame",
+        director: "Russo Brothers",
+        genre: "Action, Sci-fi",
+        isAvailable: true,
+    },
 ];
 
 function Movie (title, director, genre, isAvailable) {
@@ -70,6 +70,7 @@ function displayMovies(movieAdded, index) {
 
     movieIsAvailable.addEventListener("click", function() {
         movieIsAvailable.textContent = movieAdded.toggleAvailability();
+        console.table(movieList);
     });
     
     movieRow.appendChild(movieTitle);
@@ -81,5 +82,6 @@ function displayMovies(movieAdded, index) {
 }
 
 movieList.forEach((movie, index) => {
+    Object.setPrototypeOf(movie, Movie.prototype);
     displayMovies(movie, index);
 });
