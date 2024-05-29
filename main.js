@@ -21,29 +21,6 @@ const formMovie = document.querySelector("#form-movie")
 const dialogSubmit = document.querySelector(".dialog-submit");
 const dialogClose = document.querySelector(".dialog-close");
 
-//
-const movieRow = document.createElement("tr");
-
-const movieTitle = document.createElement("td");
-movieTitle.textContent = movieList[0].title;
-
-const movieDirector = document.createElement("td");
-movieDirector.textContent = movieList[0].director;
-
-const movieGenre = document.createElement("td");
-movieGenre.textContent = movieList[0].genre;
-
-const movieIsAvailable = document.createElement("td");
-movieIsAvailable.textContent = movieList[0].isAvailable;
-
-movieRow.appendChild(movieTitle);
-movieRow.appendChild(movieDirector);
-movieRow.appendChild(movieGenre);
-movieRow.appendChild(movieIsAvailable);
-
-movieTable.appendChild(movieRow);
-//
-
 btnAddMovie.addEventListener("click", () => {
     dialogMovie.showModal();
 });
@@ -57,7 +34,8 @@ formMovie.addEventListener("submit", (event) => {
     const genre = document.querySelector("#movie-genre").value;
 
     if (title && director && genre) {
-        movieList.push(new Movie(title, director, genre, true))
+        movieList.push(new Movie(title, director, genre, true));
+        displayMovies(movieList[movieList.length - 1]);
     }
 
     formMovie.reset();
@@ -71,3 +49,30 @@ dialogClose.addEventListener("click", () => {
 });
 
 
+function displayMovies(movieAdded) {
+    const movieRow = document.createElement("tr");
+
+    const movieTitle = document.createElement("td");
+    movieTitle.textContent = movieAdded.title;
+
+    const movieDirector = document.createElement("td");
+    movieDirector.textContent = movieAdded.director;
+
+    const movieGenre = document.createElement("td");
+    movieGenre.textContent = movieAdded.genre;
+
+    const movieIsAvailable = document.createElement("td");
+    movieIsAvailable.textContent = movieAdded.isAvailable;
+
+    movieRow.appendChild(movieTitle);
+    movieRow.appendChild(movieDirector);
+    movieRow.appendChild(movieGenre);
+    movieRow.appendChild(movieIsAvailable);
+
+    movieTable.appendChild(movieRow);
+    console.table(movieList);
+}
+
+movieList.forEach(movie => {
+    displayMovies(movie);
+});
