@@ -11,7 +11,7 @@ const customerList = [
     {
         id: 1,
         name: "Max Santos",
-        movieRented: "Avengers Infinity War"
+        movieRented: ["Avengers Infinity War", "Civil War", "Hulk", "Spider-man"]
     }
 ];
 
@@ -34,6 +34,18 @@ Movie.prototype.toggleAvailability = function() {
 
 Movie.prototype.info = function() {
     return `${this.title} directed by ${this.director}, ${this.genre} `;
+}
+
+Customer.prototype.listRentedMovie = function() {
+    let rented = "";    
+    this.movieRented.forEach((movie, index) => {
+        if (index == this.movieRented.length - 1) {
+            rented += movie;
+        } else {
+            rented += movie + ", ";
+        }
+    });
+    return rented;
 }
 
 const movieTable = document.querySelector("#table-movie");
@@ -146,8 +158,10 @@ function displayCustomer(customerAdded) {
     customerName.textContent = customerAdded.name;
     
     const customerRented = document.createElement("td");
-    customerRented.textContent = customerAdded.movieRented;
-    
+    customerRented.textContent = customerAdded.listRentedMovie();
+
+    console.log(customerAdded.listRentedMovie());
+
     customerRow.appendChild(customerName);
     customerRow.appendChild(customerRented);
 
@@ -155,6 +169,7 @@ function displayCustomer(customerAdded) {
 }
 
 customerList.forEach((customer) => {
+    Object.setPrototypeOf(customer, Customer.prototype);
     displayCustomer(customer);
 });
 
