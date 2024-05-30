@@ -17,6 +17,11 @@ const customerList = [
         id: 2,
         name: "Jeramie Santos",
         movieRented: ["One piece Stampede", "Oppenheimer", "Get Back", "Let it be"]
+    },
+    {
+        id: 3,
+        name: "Sam Sung",
+        movieRented: []
     }
 ];
 
@@ -33,7 +38,7 @@ function Movie (title, director, genre, isAvailable) {
 function Customer (id, name, movieRented) {
     this.id = id
     this.name = name;
-    this.movieRented = movieRented;
+    this.movieRented = [];
 }
 
 Movie.prototype.toggleAvailability = function() {
@@ -169,6 +174,8 @@ function displayCustomer(customerAdded) {
     customerName.textContent = customerAdded.name;
     
     const customerRented = document.createElement("td");
+    customerRented.className = "rented-movies";
+    customerRented.value = customerAdded.id;
 
     if (customerAdded.movieRented){
         customerRented.textContent = customerAdded.listRentedMovie();  
@@ -227,6 +234,18 @@ formRent.addEventListener("submit", (event) => {
             })
         }
     });
+    
+    customerList.forEach((customer) => {
+        if (customer.name == customerNames.value){
+            customer.movieRented.push(movieNames.value);
+            const update = document.querySelectorAll(".rented-movies");
+            update.forEach(data => {
+                if (data.value == customer.id){
+                    data.textContent = customer.listRentedMovie();
+                }
+            });
+        }
+    })
 
 
     dialogRent.close();
