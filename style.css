@@ -50,12 +50,16 @@ dialog label::after {
     color: red;
 }
 
-dialog input {
+dialog input, select {
     width: 100%;
     padding: .5rem;
     outline: none;
     border: 1px solid;
     border-radius: .3rem;
+}
+
+dialog select option {
+   font-size: 1rem;
 }
 
 ::backdrop {

@@ -2,7 +2,7 @@ const movieList = [
     {
         title: "Avengers Endgame",
         director: "Russo Brothers",
-        genre: "Action, Sci-fi",
+        genre: "Action, Sci-Fi",
         isAvailable: true,
     },
 ];
