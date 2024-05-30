@@ -12,6 +12,11 @@ const customerList = [
         id: 1,
         name: "Max Santos",
         movieRented: ["Avengers Infinity War", "Civil War", "Hulk", "Spider-man"]
+    },
+    {
+        id: 2,
+        name: "Jeramie Santos",
+        movieRented: ["One piece Stampede", "Oppenheimer", "Get Back", "Let it be"]
     }
 ];
 
@@ -158,9 +163,11 @@ function displayCustomer(customerAdded) {
     customerName.textContent = customerAdded.name;
     
     const customerRented = document.createElement("td");
-    customerRented.textContent = customerAdded.listRentedMovie();
 
-    console.log(customerAdded.listRentedMovie());
+    if (customerAdded.movieRented){
+        customerRented.textContent = customerAdded.listRentedMovie();  
+    }
+    
 
     customerRow.appendChild(customerName);
     customerRow.appendChild(customerRented);
