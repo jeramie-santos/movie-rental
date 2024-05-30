@@ -95,6 +95,29 @@
           </table>
         </div>
       </main>
+      <div class="rent">
+        <dialog class="dialog rent">
+          <form id="form-rent">
+            <div>
+              <label for="movie-name">Movie</label>
+              <select name="movie-name" id="movie-name" required>
+                <option selected value disabled>Select Movie</option>
+              </select>
+            </div>
+            <div>
+              <label for="customer-name">Customer</label>
+              <select name="customer-name" id="customer-name" required>
+                <option selected value disabled>Select Customer</option>
+              </select>
+            </div>
+            <div>
+              <button class="btn rent-submit">Submit</button>
+              <button class="btn rent-close">Close</button>
+            </div>
+          </form>
+        </dialog>
+        <button class="btn rent-movie">Rent a Movie</button>
+      </div>
     </div>
   </body>
 </html>
