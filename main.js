@@ -18,6 +18,10 @@ Movie.prototype.toggleAvailability = function() {
     return this.isAvailable = !this.isAvailable;
 };
 
+Movie.prototype.info = function() {
+    return `${this.title} directed by ${this.director}, ${this.genre} `;
+}
+
 const movieTable = document.querySelector("#table-movie");
 const btnAddMovie = document.querySelector(".btn.add-movie");
 const dialogMovie = document.querySelector(".dialog.movie");
@@ -70,7 +74,7 @@ function displayMovies(movieAdded, index) {
 
     movieIsAvailable.addEventListener("click", function() {
         movieIsAvailable.textContent = movieAdded.toggleAvailability();
-        console.table(movieList);
+        console.log(movieAdded.info());
     });
     
     movieRow.appendChild(movieTitle);
@@ -85,3 +89,4 @@ movieList.forEach((movie, index) => {
     Object.setPrototypeOf(movie, Movie.prototype);
     displayMovies(movie, index);
 });
+
