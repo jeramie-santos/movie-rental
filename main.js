@@ -7,11 +7,23 @@ const movieList = [
     },
 ];
 
+const customerList = [
+    {
+        name: "Max Santos",
+        movieRented: "Avengers Infinity War"
+    }
+];
+
 function Movie (title, director, genre, isAvailable) {
     this.title = title;
     this.director = director;
     this.genre = genre;
     this.isAvailable = isAvailable;
+}
+
+function Customer (name, movieRented) {
+    this.name = name;
+    this.movieRented = movieRented;
 }
 
 Movie.prototype.toggleAvailability = function() {
@@ -23,11 +35,14 @@ Movie.prototype.info = function() {
 }
 
 const movieTable = document.querySelector("#table-movie");
+const customerTable = document.querySelector("#table-customer");
 const btnAddMovie = document.querySelector(".btn.add-movie");
 const dialogMovie = document.querySelector(".dialog.movie");
 const formMovie = document.querySelector("#form-movie")
 const dialogSubmit = document.querySelector(".dialog-submit");
 const dialogClose = document.querySelector(".dialog-close");
+
+// Movie
 
 btnAddMovie.addEventListener("click", () => {
     dialogMovie.showModal();
@@ -88,5 +103,26 @@ function displayMovies(movieAdded, index) {
 movieList.forEach((movie, index) => {
     Object.setPrototypeOf(movie, Movie.prototype);
     displayMovies(movie, index);
+});
+
+// Customer
+
+function displayCustomer(customerAdded, index) {
+    const customerRow = document.createElement("tr");
+
+    const customerName = document.createElement("td");
+    customerName.textContent = customerAdded.name;
+    
+    const customerRented = document.createElement("td");
+    customerRented.textContent = customerAdded.movieRented;
+    
+    customerRow.appendChild(customerName);
+    customerRow.appendChild(customerRented);
+
+    customerTable.appendChild(customerRow);
+}
+
+customerList.forEach((customer, index) => {
+    displayCustomer(customer, index);
 });
 
