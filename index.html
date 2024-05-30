@@ -45,8 +45,8 @@
               </select>
             </div>
             <div>
-              <button type="submit" class="btn dialog-submit">Submit</button>
-              <button class="btn dialog-close">Close</button>
+              <button type="submit" class="btn movie-submit">Submit</button>
+              <button class="btn movie-close">Close</button>
             </div>
           </form>
         </dialog>
@@ -65,6 +65,24 @@
           </table>
         </div>
         <div class="customers-list">
+          <dialog class="dialog customer">
+            <form id="form-customer">
+              <div>
+                <label for="f-name">First Name</label>
+                <input type="text" name="f-name" id="f-name" required />
+              </div>
+              <div>
+                <label for="l-name">Last Name</label>
+                <input type="text" name="l-name" id="l-name" required />
+              </div>
+              <div>
+                <button type="submit" class="btn customer-submit">
+                  Submit
+                </button>
+                <button class="btn customer-close">Close</button>
+              </div>
+            </form>
+          </dialog>
           <div class="customer-header">
             <h2>Customer List</h2>
             <button class="btn add-customer">Add customer</button>

@@ -9,6 +9,7 @@ const movieList = [
 
 const customerList = [
     {
+        id: 1,
         name: "Max Santos",
         movieRented: "Avengers Infinity War"
     }
@@ -21,7 +22,8 @@ function Movie (title, director, genre, isAvailable) {
     this.isAvailable = isAvailable;
 }
 
-function Customer (name, movieRented) {
+function Customer (id, name, movieRented) {
+    this.id = id
     this.name = name;
     this.movieRented = movieRented;
 }
@@ -35,12 +37,10 @@ Movie.prototype.info = function() {
 }
 
 const movieTable = document.querySelector("#table-movie");
-const customerTable = document.querySelector("#table-customer");
 const btnAddMovie = document.querySelector(".btn.add-movie");
 const dialogMovie = document.querySelector(".dialog.movie");
 const formMovie = document.querySelector("#form-movie")
-const dialogSubmit = document.querySelector(".dialog-submit");
-const dialogClose = document.querySelector(".dialog-close");
+const movieClose = document.querySelector(".movie-close");
 
 // Movie
 
@@ -65,7 +65,7 @@ formMovie.addEventListener("submit", (event) => {
     dialogMovie.close();
 });
 
-dialogClose.addEventListener("click", () => {
+movieClose.addEventListener("click", () => {
     formMovie.reset();
     dialogMovie.close();
 
@@ -107,7 +107,39 @@ movieList.forEach((movie, index) => {
 
 // Customer
 
-function displayCustomer(customerAdded, index) {
+const customerTable = document.querySelector("#table-customer");
+const dialogCustomer = document.querySelector(".dialog.customer");
+const formCustomer = document.querySelector("#form-customer");
+const btnAddCustomer = document.querySelector(".btn.add-customer");
+const customerClose = document.querySelector(".customer-close");
+
+btnAddCustomer.addEventListener("click", () => {
+    dialogCustomer.showModal();
+});
+
+customerClose.addEventListener("click", () => {
+    formCustomer.reset();
+    dialogCustomer.close();
+});
+
+formCustomer.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const fName = document.querySelector("#f-name").value;
+    const lName = document.querySelector("#l-name").value;
+    const fullName = `${fName} ${lName}`;
+
+    if (fullName && lName){
+        customerList.push(new Customer(customerList.length + 1, fullName, ""));
+        displayCustomer(customerList[customerList.length - 1],);
+    }
+
+    formCustomer.reset();
+    dialogCustomer.close();
+
+});
+
+function displayCustomer(customerAdded) {
     const customerRow = document.createElement("tr");
 
     const customerName = document.createElement("td");
@@ -122,7 +154,9 @@ function displayCustomer(customerAdded, index) {
     customerTable.appendChild(customerRow);
 }
 
-customerList.forEach((customer, index) => {
-    displayCustomer(customer, index);
+customerList.forEach((customer) => {
+    displayCustomer(customer);
 });
+
+
 
