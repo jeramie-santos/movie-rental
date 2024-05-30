@@ -111,11 +111,7 @@ function displayMovies(movieAdded, index) {
     const movieIsAvailable = document.createElement("td");
     movieIsAvailable.textContent = movieAdded.isAvailable;
     movieIsAvailable.className = "availability";
-
-    movieIsAvailable.addEventListener("click", function() {
-        movieIsAvailable.textContent = movieAdded.toggleAvailability();
-        console.log(movieAdded.info());
-    });
+    movieIsAvailable.value = index;
     
     movieRow.appendChild(movieTitle);
     movieRow.appendChild(movieDirector);
@@ -221,7 +217,17 @@ function updateListCustomer (customerAdded){
 formRent.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    console.log(customerNames.value + " " + movieNames.value);
+    movieList.forEach((movie, index) => {
+        if (movie.title == movieNames.value){
+            const update = document.querySelectorAll(".availability");
+            update.forEach(item => {
+                if (item.value == index){
+                    item.textContent = movie.toggleAvailability();
+                }
+            })
+        }
+    });
+
 
     dialogRent.close();
     formRent.reset();
