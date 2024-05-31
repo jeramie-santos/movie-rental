@@ -12,26 +12,26 @@ const movieList = [
         isAvailable: true,
     },
     {
-        title: "Civil War",
-        director: "Director",
-        genre: "Action, Sci-Fi",
-        isAvailable: true,
-    },
-    {
         title: "Hulk",
-        director: "Smash",
+        director: "Louis Leterrier",
         genre: "Action, Sci-Fi",
         isAvailable: true,
     },
     {
-        title: "Spider-man",
-        director: "Goat",
+        title: "Civil War",
+        director: "Ruso Brothers",
+        genre: "Action, Sci-Fi",
+        isAvailable: true,
+    },
+    {
+        title: "Spider-man: No Way Home",
+        director: "John Watts",
         genre: "Action, Sci-Fi",
         isAvailable: true,
     },
     {
         title: "One Piece Stampede",
-        director: "Eichiro Oda",
+        director: "Takashi Otsuka",
         genre: "Anime",
         isAvailable: true,
     },
@@ -50,7 +50,7 @@ const customerList = [
     },
     {
         id: 3,
-        name: "Sam Sung",
+        name: "Sanji Vinsmoke",
         movieRented: []
     }
 ];
@@ -239,7 +239,6 @@ btnRent.addEventListener("click", () => {
 
 function updateListMovies(movieAdded){
         if (rentedUpdate){
-            console.log(movieAdded);
             const optionRented = document.querySelectorAll(".option-rented");
             for (let i = 0; i < optionRented.length; i++) {
                 movieNames.removeChild(optionRented[i]);
