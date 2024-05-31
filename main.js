@@ -11,18 +11,42 @@ const movieList = [
         genre: "Action, Sci-Fi",
         isAvailable: true,
     },
+    {
+        title: "Civil War",
+        director: "Director",
+        genre: "Action, Sci-Fi",
+        isAvailable: true,
+    },
+    {
+        title: "Hulk",
+        director: "Smash",
+        genre: "Action, Sci-Fi",
+        isAvailable: true,
+    },
+    {
+        title: "Spider-man",
+        director: "Goat",
+        genre: "Action, Sci-Fi",
+        isAvailable: true,
+    },
+    {
+        title: "One Piece Stampede",
+        director: "Eichiro Oda",
+        genre: "Anime",
+        isAvailable: true,
+    },
 ];
 
 const customerList = [
     {
         id: 1,
         name: "Max Santos",
-        movieRented: ["Civil War", "Hulk", "Spider-man"]
+        movieRented: []
     },
     {
         id: 2,
         name: "Jeramie Santos",
-        movieRented: ["One piece Stampede", "Oppenheimer"]
+        movieRented: []
     },
     {
         id: 3,
@@ -215,6 +239,7 @@ btnRent.addEventListener("click", () => {
 
 function updateListMovies(movieAdded){
         if (rentedUpdate){
+            console.log(movieAdded);
             const optionRented = document.querySelectorAll(".option-rented");
             for (let i = 0; i < optionRented.length; i++) {
                 movieNames.removeChild(optionRented[i]);
@@ -267,6 +292,9 @@ formRent.addEventListener("submit", (event) => {
                 }
             })
         }
+    });
+
+    movieList.forEach(movie => {
         updateListMovies(movie);
     });
     
