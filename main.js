@@ -5,18 +5,24 @@ const movieList = [
         genre: "Action, Sci-Fi",
         isAvailable: true,
     },
+    {
+        title: "Avengers Infinity War",
+        director: "Russo Brothers",
+        genre: "Action, Sci-Fi",
+        isAvailable: true,
+    },
 ];
 
 const customerList = [
     {
         id: 1,
         name: "Max Santos",
-        movieRented: ["Avengers Infinity War", "Civil War", "Hulk", "Spider-man"]
+        movieRented: ["Civil War", "Hulk", "Spider-man"]
     },
     {
         id: 2,
         name: "Jeramie Santos",
-        movieRented: ["One piece Stampede", "Oppenheimer", "Get Back", "Let it be"]
+        movieRented: ["One piece Stampede", "Oppenheimer"]
     },
     {
         id: 3,
@@ -24,6 +30,8 @@ const customerList = [
         movieRented: []
     }
 ];
+
+let rentedUpdate = false;
 
 const customerNames = document.querySelector("#customer-name");
 const movieNames = document.querySelector("#movie-name");
@@ -206,11 +214,23 @@ btnRent.addEventListener("click", () => {
 });
 
 function updateListMovies(movieAdded){
+        if (rentedUpdate){
+            const optionRented = document.querySelectorAll(".option-rented");
+            for (let i = 0; i < optionRented.length; i++) {
+                movieNames.removeChild(optionRented[i]);
+            }
+
+            rentedUpdate = false;
+        }
+
         const optionMovie = document.createElement("option");
         optionMovie.textContent = movieAdded.title;
         optionMovie.value = movieAdded.title;
+        optionMovie.className = "option-rented";
     
-        movieNames.appendChild(optionMovie);
+        if (movieAdded.isAvailable){
+            movieNames.appendChild(optionMovie);
+        }
 }
  
 function updateListCustomer (customerAdded){
@@ -224,17 +244,6 @@ function updateListCustomer (customerAdded){
 formRent.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    movieList.forEach((movie, index) => {
-        if (movie.title == movieNames.value){
-            const update = document.querySelectorAll(".availability");
-            update.forEach(item => {
-                if (item.value == index){
-                    item.textContent = movie.toggleAvailability();
-                }
-            })
-        }
-    });
-    
     customerList.forEach((customer) => {
         if (customer.name == customerNames.value){
             customer.movieRented.push(movieNames.value);
@@ -247,7 +256,20 @@ formRent.addEventListener("submit", (event) => {
         }
     })
 
-
+    movieList.forEach((movie, index) => {
+        if (movie.title == movieNames.value){
+            const update = document.querySelectorAll(".availability");
+            update.forEach(item => {
+                if (item.value == index){
+                    item.textContent = movie.toggleAvailability();
+                    rentedUpdate = true;
+                    
+                }
+            })
+        }
+        updateListMovies(movie);
+    });
+    
     dialogRent.close();
     formRent.reset();
 });
