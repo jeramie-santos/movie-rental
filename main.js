@@ -317,20 +317,35 @@ const formReturn = document.querySelector("#form-return");
 const btnReturn = document.querySelector(".btn.return-movie");
 
 function displayCustomerRented(customer){
+    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
+    rentedCustomer.forEach(customerRent => {
+        if (customerRent.value == customer.name){
+            selectCusomter.removeChild(customerRent);
+        }
+    });
+
     const customerThatRent = document.createElement("option");
     customerThatRent.textContent = customer.name;
     customerThatRent.value = customer.name;
+    customerThatRent.className = "rented-customer";
 
     selectCusomter.appendChild(customerThatRent);
 }
 
 selectCusomter.addEventListener("click", () => {
+    const rentedList = document.querySelectorAll(".rented-list"); 
+    rentedList.forEach(list => {
+        selectMovie.removeChild(list);
+    });
+
+
     customerList.forEach(customer => {
         if(customer.name == selectCusomter.value){
             customer.movieRented.forEach(movie => {
                 const selectMovieRented = document.createElement("option");
                 selectMovieRented.textContent = movie;
                 selectMovieRented.value = movie;
+                selectMovieRented.className = "rented-list";
 
                 selectMovie.appendChild(selectMovieRented);
             });
