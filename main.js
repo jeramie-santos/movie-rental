@@ -394,8 +394,23 @@ formReturn.addEventListener("submit", (event) => {
 });
 
 btnReturn.addEventListener("click", () => {
-    dialogReturn.showModal();
+    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
+    rentedCustomer.forEach(customerRent => {
+        customerList.forEach(customer => {
+            if (customer.name == customerRent.value){
+                if (customer.movieRented.length == 0){
+                    selectCusomter.removeChild(customerRent);
+                }
+            }
+        });
+    });
 
+    const rentedList = document.querySelectorAll(".rented-list"); 
+    rentedList.forEach(list => {
+        selectMovie.removeChild(list);
+    });
+
+    dialogReturn.showModal();
 });
 
 returnClose.addEventListener("click", ()=> {
