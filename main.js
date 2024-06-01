@@ -372,6 +372,22 @@ formReturn.addEventListener("submit", (event) => {
         }
     });
 
+    movieList.forEach((movie, index) => {
+        if (movie.title == selectMovie.value){
+            const update = document.querySelectorAll(".availability");
+            update.forEach(item => {
+                if (item.value == index){
+                    item.textContent = movie.toggleAvailability();
+                    rentedUpdate = true;
+                }
+            })
+        }
+    });
+
+    movieList.forEach(movie => {
+        updateListMovies(movie);
+    });
+
 
     dialogReturn.close();
     formReturn.reset();
