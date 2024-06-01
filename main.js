@@ -356,6 +356,23 @@ selectCusomter.addEventListener("click", () => {
 formReturn.addEventListener("submit", (event) => {
     event.preventDefault();
 
+    customerList.forEach(customer => {
+        if (customer.name == selectCusomter.value){
+            customer.movieRented.forEach((movie, index) => {
+                if (movie == selectMovie.value){
+                    customer.movieRented.splice(index, 1);
+                    const update = document.querySelectorAll(".rented-movies");
+                    update.forEach(data => {
+                        if (data.value == customer.id){
+                            data.textContent = customer.listRentedMovie();
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+
     dialogReturn.close();
     formReturn.reset();
 });
