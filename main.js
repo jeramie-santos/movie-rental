@@ -60,6 +60,7 @@ let rentedUpdate = false;
 const customerNames = document.querySelector("#customer-name");
 const movieNames = document.querySelector("#movie-name");
 const selectCusomter = document.querySelector("#customer-return");
+const selectMovie = document.querySelector("#movie-return");
 
 
 function Movie (title, director, genre, isAvailable) {
@@ -322,6 +323,20 @@ function displayCustomerRented(customer){
 
     selectCusomter.appendChild(customerThatRent);
 }
+
+selectCusomter.addEventListener("click", () => {
+    customerList.forEach(customer => {
+        if(customer.name == selectCusomter.value){
+            customer.movieRented.forEach(movie => {
+                const selectMovieRented = document.createElement("option");
+                selectMovieRented.textContent = movie;
+                selectMovieRented.value = movie;
+
+                selectMovie.appendChild(selectMovieRented);
+            });
+        }
+    });
+})
 
 formReturn.addEventListener("submit", (event) => {
     event.preventDefault();
