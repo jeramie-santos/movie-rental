@@ -59,6 +59,8 @@ let rentedUpdate = false;
 
 const customerNames = document.querySelector("#customer-name");
 const movieNames = document.querySelector("#movie-name");
+const selectCusomter = document.querySelector("#customer-return");
+
 
 function Movie (title, director, genre, isAvailable) {
     this.title = title;
@@ -275,6 +277,7 @@ formRent.addEventListener("submit", (event) => {
             update.forEach(data => {
                 if (data.value == customer.id){
                     data.textContent = customer.listRentedMovie();
+                    displayCustomerRented(customer);
                 }
             });
         }
@@ -287,7 +290,6 @@ formRent.addEventListener("submit", (event) => {
                 if (item.value == index){
                     item.textContent = movie.toggleAvailability();
                     rentedUpdate = true;
-                    
                 }
             })
         }
@@ -313,21 +315,35 @@ const formReturn = document.querySelector("#form-return");
 
 const btnReturn = document.querySelector(".btn.return-movie");
 
+function displayCustomerRented(customer){
+    const customerThatRent = document.createElement("option");
+    customerThatRent.textContent = customer.name;
+    customerThatRent.value = customer.name;
+
+    selectCusomter.appendChild(customerThatRent);
+}
+
 formReturn.addEventListener("submit", (event) => {
     event.preventDefault();
 
     dialogReturn.close();
     formReturn.reset();
-
 });
 
 btnReturn.addEventListener("click", () => {
     dialogReturn.showModal();
+
 });
 
 returnClose.addEventListener("click", ()=> {
     dialogReturn.close();
     formReturn.reset();
+});
+
+customerList.forEach(customer => {
+    if (customer.movieRented.length != 0){
+        displayCustomerRented(customer);
+    }
 });
 
 
