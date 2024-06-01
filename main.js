@@ -306,6 +306,31 @@ rentClose.addEventListener("click", () => {
     formRent.reset();
 })
 
+// Return 
+const dialogReturn = document.querySelector(".dialog.return");
+const returnClose = document.querySelector(".return-close");
+const formReturn = document.querySelector("#form-return");
+
+const btnReturn = document.querySelector(".btn.return-movie");
+
+formReturn.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    dialogReturn.close();
+    formReturn.reset();
+
+});
+
+btnReturn.addEventListener("click", () => {
+    dialogReturn.showModal();
+});
+
+returnClose.addEventListener("click", ()=> {
+    dialogReturn.close();
+    formReturn.reset();
+});
+
+
 
 
 

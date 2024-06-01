@@ -118,6 +118,29 @@
         </dialog>
         <button class="btn rent-movie">Rent a Movie</button>
       </div>
+      <div class="return">
+        <dialog class="dialog return">
+          <form id="form-return">
+            <div>
+              <label for="customer-return">Customer</label>
+              <select name="customer-return" id="customer-return" required>
+                <option selected value disabled>Select Customer</option>
+              </select>
+            </div>
+            <div>
+              <label for="movie-return">Movie</label>
+              <select name="movie-return" id="movie-return" required>
+                <option selected value disabled>Select Movie</option>
+              </select>
+            </div>
+            <div>
+              <button class="btn return-submit">Submit</button>
+              <button class="btn return-close">Close</button>
+            </div>
+          </form>
+        </dialog>
+        <button class="btn return-movie">Return a movie</button>
+      </div>
     </div>
   </body>
 </html>
