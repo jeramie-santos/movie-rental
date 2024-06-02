@@ -57,11 +57,7 @@ const customerList = [
 
 let rentedUpdate = false;
 
-const customerNames = document.querySelector("#customer-name");
-const movieNames = document.querySelector("#movie-name");
-const selectCusomter = document.querySelector("#customer-return");
-const selectMovie = document.querySelector("#movie-return");
-
+// Constructor
 
 function Movie (title, director, genre, isAvailable) {
     this.title = title;
@@ -75,6 +71,8 @@ function Customer (id, name, movieRented) {
     this.name = name;
     this.movieRented = [];
 }
+
+// Methods
 
 Movie.prototype.toggleAvailability = function() {
     return this.isAvailable = !this.isAvailable;
@@ -100,17 +98,100 @@ Customer.prototype.rentAMovie = function () {
 
 };
 
+const customerNames = document.querySelector("#customer-name");
+const movieNames = document.querySelector("#movie-name");
+const selectCusomter = document.querySelector("#customer-return");
+const selectMovie = document.querySelector("#movie-return");
+
 const movieTable = document.querySelector("#table-movie");
 const btnAddMovie = document.querySelector(".btn.add-movie");
 const dialogMovie = document.querySelector(".dialog.movie");
 const formMovie = document.querySelector("#form-movie")
-const movieClose = document.querySelector(".movie-close");
+const movieModalClose = document.querySelector(".movie-close");
 
-// Movie
+const customerTable = document.querySelector("#table-customer");
+const dialogCustomer = document.querySelector(".dialog.customer");
+const formCustomer = document.querySelector("#form-customer");
+const btnAddCustomer = document.querySelector(".btn.add-customer");
+const customerModalClose = document.querySelector(".customer-close");
+
+const dialogRent = document.querySelector(".dialog.rent");
+const formRent = document.querySelector("#form-rent");
+const rentModalClose = document.querySelector(".rent-close");
+const btnRentMovie = document.querySelector(".btn.rent-movie");
+
+const dialogReturn = document.querySelector(".dialog.return");
+const returnModalClose = document.querySelector(".return-close");
+const formReturn = document.querySelector("#form-return");
+const btnReturnMovie = document.querySelector(".btn.return-movie");
+
+
+// to show modal
+
 
 btnAddMovie.addEventListener("click", () => {
     dialogMovie.showModal();
 });
+
+btnAddCustomer.addEventListener("click", () => {
+    dialogCustomer.showModal();
+});
+
+btnRentMovie.addEventListener("click", () => {
+    dialogRent.showModal();
+});
+
+
+// Need to clean
+btnReturnMovie.addEventListener("click", () => {
+    // to remove name of customer when there is no rented movie
+    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
+    rentedCustomer.forEach(customerRent => {
+        customerList.forEach(customer => {
+            if (customer.name == customerRent.value){
+                if (customer.movieRented.length == 0){
+                    selectCusomter.removeChild(customerRent);
+                }
+            }
+        });
+    });
+
+    // same here just to remove movie that was appended on the list
+
+    const rentedList = document.querySelectorAll(".rented-list"); 
+    rentedList.forEach(list => {
+        selectMovie.removeChild(list);
+    });
+
+    dialogReturn.showModal();
+});
+
+
+// to close modal
+
+movieModalClose.addEventListener("click", () => {
+    formMovie.reset();
+    dialogMovie.close();
+
+});
+
+customerModalClose.addEventListener("click", () => {
+    formCustomer.reset();
+    dialogCustomer.close();
+});
+
+rentModalClose.addEventListener("click", () => {
+    dialogRent.close();
+    formRent.reset();
+})
+
+returnModalClose.addEventListener("click", ()=> {
+    dialogReturn.close();
+    formReturn.reset();
+});
+
+
+// Movie
 
 
 formMovie.addEventListener("submit", (event) => {
@@ -130,11 +211,7 @@ formMovie.addEventListener("submit", (event) => {
     dialogMovie.close();
 });
 
-movieClose.addEventListener("click", () => {
-    formMovie.reset();
-    dialogMovie.close();
 
-});
 
 function displayMovies(movieAdded, index) {
     const movieRow = document.createElement("tr");
@@ -169,20 +246,7 @@ movieList.forEach((movie, index) => {
 
 // Customer
 
-const customerTable = document.querySelector("#table-customer");
-const dialogCustomer = document.querySelector(".dialog.customer");
-const formCustomer = document.querySelector("#form-customer");
-const btnAddCustomer = document.querySelector(".btn.add-customer");
-const customerClose = document.querySelector(".customer-close");
 
-btnAddCustomer.addEventListener("click", () => {
-    dialogCustomer.showModal();
-});
-
-customerClose.addEventListener("click", () => {
-    formCustomer.reset();
-    dialogCustomer.close();
-});
 
 formCustomer.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -230,15 +294,6 @@ customerList.forEach((customer) => {
 });
 
 // Rent 
-const dialogRent = document.querySelector(".dialog.rent");
-const formRent = document.querySelector("#form-rent");
-const rentClose = document.querySelector(".rent-close");
-
-const btnRent = document.querySelector(".btn.rent-movie");
-
-btnRent.addEventListener("click", () => {
-    dialogRent.showModal();
-});
 
 function updateListMovies(movieAdded){
         if (rentedUpdate){
@@ -304,17 +359,9 @@ formRent.addEventListener("submit", (event) => {
     formRent.reset();
 });
 
-rentClose.addEventListener("click", () => {
-    dialogRent.close();
-    formRent.reset();
-})
+
 
 // Return 
-const dialogReturn = document.querySelector(".dialog.return");
-const returnClose = document.querySelector(".return-close");
-const formReturn = document.querySelector("#form-return");
-
-const btnReturn = document.querySelector(".btn.return-movie");
 
 function displayCustomerRented(customer){
     const rentedCustomer = document.querySelectorAll(".rented-customer"); 
@@ -393,30 +440,7 @@ formReturn.addEventListener("submit", (event) => {
     formReturn.reset();
 });
 
-btnReturn.addEventListener("click", () => {
-    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
-    rentedCustomer.forEach(customerRent => {
-        customerList.forEach(customer => {
-            if (customer.name == customerRent.value){
-                if (customer.movieRented.length == 0){
-                    selectCusomter.removeChild(customerRent);
-                }
-            }
-        });
-    });
 
-    const rentedList = document.querySelectorAll(".rented-list"); 
-    rentedList.forEach(list => {
-        selectMovie.removeChild(list);
-    });
-
-    dialogReturn.showModal();
-});
-
-returnClose.addEventListener("click", ()=> {
-    dialogReturn.close();
-    formReturn.reset();
-});
 
 customerList.forEach(customer => {
     if (customer.movieRented.length != 0){
