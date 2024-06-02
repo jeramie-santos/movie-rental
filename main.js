@@ -57,9 +57,11 @@ const customerList = [
 
 let rentedUpdate = false;
 
+
+
 // Constructor
 
-function Movie (title, director, genre, isAvailable) {
+function Movie (title, director, genre, isAvailable = true) {
     this.title = title;
     this.director = director;
     this.genre = genre;
@@ -80,6 +82,31 @@ Movie.prototype.toggleAvailability = function() {
 
 Movie.prototype.info = function() {
     return `${this.title} directed by ${this.director}, ${this.genre} `;
+}
+
+Movie.prototype.displayMovies = function(index) {
+    const movieRow = document.createElement("tr");
+
+    const movieTitle = document.createElement("td");
+    movieTitle.textContent = this.title;
+
+    const movieDirector = document.createElement("td");
+    movieDirector.textContent = this.director;
+
+    const movieGenre = document.createElement("td");
+    movieGenre.textContent = this.genre;
+
+    const movieIsAvailable = document.createElement("td");
+    movieIsAvailable.textContent = this.isAvailable;
+    movieIsAvailable.className = "availability";
+    movieIsAvailable.value = index;
+    
+    movieRow.appendChild(movieTitle);
+    movieRow.appendChild(movieDirector);
+    movieRow.appendChild(movieGenre);
+    movieRow.appendChild(movieIsAvailable);
+
+    movieTable.appendChild(movieRow);
 }
 
 Customer.prototype.listRentedMovie = function() {
@@ -202,8 +229,8 @@ formMovie.addEventListener("submit", (event) => {
     const genre = document.querySelector("#movie-genre").value;
 
     if (title && director && genre) {
-        movieList.push(new Movie(title, director, genre, true));
-        displayMovies(movieList[movieList.length - 1], movieList.length - 1);
+        movieList.push(new Movie(title, director, genre));
+        movieList[movieList.length - 1].displayMovies(movieList.length - 1);
     }
 
     updateListMovies(movieList[movieList.length - 1]);
@@ -211,40 +238,13 @@ formMovie.addEventListener("submit", (event) => {
     dialogMovie.close();
 });
 
-
-
-function displayMovies(movieAdded, index) {
-    const movieRow = document.createElement("tr");
-
-    const movieTitle = document.createElement("td");
-    movieTitle.textContent = movieAdded.title;
-
-    const movieDirector = document.createElement("td");
-    movieDirector.textContent = movieAdded.director;
-
-    const movieGenre = document.createElement("td");
-    movieGenre.textContent = movieAdded.genre;
-
-    const movieIsAvailable = document.createElement("td");
-    movieIsAvailable.textContent = movieAdded.isAvailable;
-    movieIsAvailable.className = "availability";
-    movieIsAvailable.value = index;
-    
-    movieRow.appendChild(movieTitle);
-    movieRow.appendChild(movieDirector);
-    movieRow.appendChild(movieGenre);
-    movieRow.appendChild(movieIsAvailable);
-
-    movieTable.appendChild(movieRow);
-}
-
 movieList.forEach((movie, index) => {
     Object.setPrototypeOf(movie, Movie.prototype);
-    displayMovies(movie, index);
+    movie.displayMovies(index);
     updateListMovies(movie);
 });
 
-// Customer
+// // Customer
 
 
 
