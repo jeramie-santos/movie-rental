@@ -109,6 +109,8 @@ Movie.prototype.displayMovies = function(index) {
     movieTable.appendChild(movieRow);
 }
 
+
+
 Customer.prototype.listRentedMovie = function() {
     let rented = "";    
     this.movieRented.forEach((movie, index) => {
@@ -121,9 +123,30 @@ Customer.prototype.listRentedMovie = function() {
     return rented;
 }
 
-Customer.prototype.rentAMovie = function () {
+Customer.prototype.rentAMovie = function() {
 
 };
+
+Customer.prototype.displayCustomer = function() {
+    const customerRow = document.createElement("tr");
+
+    const customerName = document.createElement("td");
+    customerName.textContent = this.name;
+    
+    const customerRented = document.createElement("td");
+    customerRented.className = "rented-movies";
+    customerRented.value = this.id;
+
+    if (this.movieRented){
+        customerRented.textContent = this.listRentedMovie();  
+    }
+    
+
+    customerRow.appendChild(customerName);
+    customerRow.appendChild(customerRented);
+
+    customerTable.appendChild(customerRow);
+}
 
 const customerNames = document.querySelector("#customer-name");
 const movieNames = document.querySelector("#movie-name");
@@ -257,7 +280,7 @@ formCustomer.addEventListener("submit", (event) => {
 
     if (fullName && lName){
         customerList.push(new Customer(customerList.length + 1, fullName, ""));
-        displayCustomer(customerList[customerList.length - 1]);
+        customerList[customerList.length - 1].displayCustomer();
     }
 
     updateListCustomer(customerList[customerList.length - 1]);
@@ -266,30 +289,9 @@ formCustomer.addEventListener("submit", (event) => {
 
 });
 
-function displayCustomer(customerAdded) {
-    const customerRow = document.createElement("tr");
-
-    const customerName = document.createElement("td");
-    customerName.textContent = customerAdded.name;
-    
-    const customerRented = document.createElement("td");
-    customerRented.className = "rented-movies";
-    customerRented.value = customerAdded.id;
-
-    if (customerAdded.movieRented){
-        customerRented.textContent = customerAdded.listRentedMovie();  
-    }
-    
-
-    customerRow.appendChild(customerName);
-    customerRow.appendChild(customerRented);
-
-    customerTable.appendChild(customerRow);
-}
-
 customerList.forEach((customer) => {
     Object.setPrototypeOf(customer, Customer.prototype);
-    displayCustomer(customer);
+    customer.displayCustomer();
     updateListCustomer(customer);
 });
 
