@@ -109,8 +109,6 @@ Movie.prototype.displayMovies = function(index) {
     movieTable.appendChild(movieRow);
 }
 
-
-
 Customer.prototype.listRentedMovie = function() {
     let rented = "";    
     this.movieRented.forEach((movie, index) => {
@@ -122,10 +120,6 @@ Customer.prototype.listRentedMovie = function() {
     });
     return rented;
 }
-
-Customer.prototype.rentAMovie = function() {
-
-};
 
 Customer.prototype.displayCustomer = function() {
     const customerRow = document.createElement("tr");
@@ -194,25 +188,7 @@ btnRentMovie.addEventListener("click", () => {
 
 // Need to clean
 btnReturnMovie.addEventListener("click", () => {
-    // to remove name of customer when there is no rented movie
-    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
-    rentedCustomer.forEach(customerRent => {
-        customerList.forEach(customer => {
-            if (customer.name == customerRent.value){
-                if (customer.movieRented.length == 0){
-                    selectCusomter.removeChild(customerRent);
-                }
-            }
-        });
-    });
-
-    // same here just to remove movie that was appended on the list
-
-    const rentedList = document.querySelectorAll(".rented-list"); 
-    rentedList.forEach(list => {
-        selectMovie.removeChild(list);
-    });
-
+    refreshSelectRetrurn();
     dialogReturn.showModal();
 });
 
@@ -241,7 +217,7 @@ returnModalClose.addEventListener("click", ()=> {
 });
 
 
-function movieAvailability(selected) {
+function toggleMovieAvailability(selected) {
     movieList.forEach((movie, index) => {
         if (movie.title == selected.value){
             const update = document.querySelectorAll(".availability");
@@ -252,6 +228,24 @@ function movieAvailability(selected) {
                 }
             })
         }
+    });
+}
+
+function refreshSelectRetrurn(){
+    const rentedCustomer = document.querySelectorAll(".rented-customer"); 
+    rentedCustomer.forEach(customerRent => {
+        customerList.forEach(customer => {
+            if (customer.name == customerRent.value){
+                if (customer.movieRented.length == 0){
+                    selectCusomter.removeChild(customerRent);
+                }
+            }
+        });
+    });
+
+    const rentedList = document.querySelectorAll(".rented-list"); 
+    rentedList.forEach(list => {
+        selectMovie.removeChild(list);
     });
 }
 
@@ -283,8 +277,6 @@ movieList.forEach((movie, index) => {
 });
 
 // // Customer
-
-
 
 formCustomer.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -356,7 +348,7 @@ formRent.addEventListener("submit", (event) => {
         }
     })
 
-    movieAvailability(movieNames);
+    toggleMovieAvailability(movieNames);
 
     movieList.forEach(movie => {
         updateListMovies(movie);
@@ -425,7 +417,7 @@ formReturn.addEventListener("submit", (event) => {
         }
     });
 
-    movieAvailability(selectMovie);
+    toggleMovieAvailability(selectMovie);
 
     movieList.forEach(movie => {
         updateListMovies(movie);
@@ -443,10 +435,3 @@ customerList.forEach(customer => {
         displayCustomerRented(customer);
     }
 });
-
-
-
-
-
-
-
