@@ -241,6 +241,21 @@ returnModalClose.addEventListener("click", ()=> {
 });
 
 
+function movieAvailability(selected) {
+    movieList.forEach((movie, index) => {
+        if (movie.title == selected.value){
+            const update = document.querySelectorAll(".availability");
+            update.forEach(item => {
+                if (item.value == index){
+                    item.textContent = movie.toggleAvailability();
+                    rentedUpdate = true;
+                }
+            })
+        }
+    });
+}
+
+
 // Movie
 
 
@@ -341,17 +356,7 @@ formRent.addEventListener("submit", (event) => {
         }
     })
 
-    movieList.forEach((movie, index) => {
-        if (movie.title == movieNames.value){
-            const update = document.querySelectorAll(".availability");
-            update.forEach(item => {
-                if (item.value == index){
-                    item.textContent = movie.toggleAvailability();
-                    rentedUpdate = true;
-                }
-            })
-        }
-    });
+    movieAvailability(movieNames);
 
     movieList.forEach(movie => {
         updateListMovies(movie);
@@ -360,7 +365,6 @@ formRent.addEventListener("submit", (event) => {
     dialogRent.close();
     formRent.reset();
 });
-
 
 
 // Return 
@@ -421,17 +425,7 @@ formReturn.addEventListener("submit", (event) => {
         }
     });
 
-    movieList.forEach((movie, index) => {
-        if (movie.title == selectMovie.value){
-            const update = document.querySelectorAll(".availability");
-            update.forEach(item => {
-                if (item.value == index){
-                    item.textContent = movie.toggleAvailability();
-                    rentedUpdate = true;
-                }
-            })
-        }
-    });
+    movieAvailability(selectMovie);
 
     movieList.forEach(movie => {
         updateListMovies(movie);
