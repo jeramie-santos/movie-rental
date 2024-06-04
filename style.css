@@ -74,6 +74,16 @@ tbody tr:nth-of-type(even) {
     background-color: #cac8c8;
 }
 
+.availability {
+    background-color: lightcoral;
+    color: darkred;
+}
+
+.available {
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
 button {
     font-family: inherit;
     padding: .5rem 1rem;
@@ -81,6 +91,12 @@ button {
     border: 1px solid var(--accent-color);
     background-color: var(--accent-color);
     color: var(--light-color);
+}
+
+button:hover {
+    border: 1px solid #a34425;
+    background-color: #a34425;
+    cursor: pointer;
 }
 
 .movie-header,
@@ -124,6 +140,7 @@ dialog input, select {
     outline: none;
     border: 1px solid;
     border-radius: .3rem;
+    font-family: inherit;
 }
 
 dialog select option {
@@ -134,12 +151,29 @@ dialog select option {
     background-color: rgba(0, 0, 0, .5);
 }
 
-.availability {
-    background-color: lightcoral;
-    color: darkred;
+.dialog-button{
+    display: flex;
+    gap: 1rem;
 }
 
-.available {
-    background-color: lightgreen;
-    color: darkgreen;
+
+.dialog-button button {
+    flex: 1;
 }
+
+.movie-close,
+.customer-close,
+.rent-close,
+.return-close {
+    background-color: white;
+    color: var(--accent-color);
+}
+
+.movie-close:hover,
+.customer-close:hover,
+.rent-close:hover,
+.return-close:hover {
+    background-color: var(--accent-color);
+    color: var(--light-color);
+}
+
