@@ -97,7 +97,7 @@ Movie.prototype.displayMovies = function(index) {
     movieGenre.textContent = this.genre;
 
     const movieIsAvailable = document.createElement("td");
-    movieIsAvailable.textContent = this.isAvailable;
+    movieIsAvailable.textContent = this.isAvailable ? "Yes" : "No";
     movieIsAvailable.className = "availability";
     movieIsAvailable.value = index;
     
@@ -223,7 +223,7 @@ function toggleMovieAvailability(selected) {
             const update = document.querySelectorAll(".availability");
             update.forEach(item => {
                 if (item.value == index){
-                    item.textContent = movie.toggleAvailability();
+                    item.textContent = movie.toggleAvailability() ? "Yes" : "No";
                     rentedUpdate = true;
                 }
             })
