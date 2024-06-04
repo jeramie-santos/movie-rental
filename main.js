@@ -2,31 +2,31 @@ const movieList = [
     {
         title: "Avengers Endgame",
         director: "Russo Brothers",
-        genre: "Action, Sci-Fi",
+        genre: "Sci-Fi",
         isAvailable: true,
     },
     {
         title: "Avengers Infinity War",
         director: "Russo Brothers",
-        genre: "Action, Sci-Fi",
+        genre: "Sci-Fi",
         isAvailable: true,
     },
     {
         title: "Hulk",
         director: "Louis Leterrier",
-        genre: "Action, Sci-Fi",
+        genre: "Sci-Fi",
         isAvailable: true,
     },
     {
         title: "Civil War",
         director: "Russo Brothers",
-        genre: "Action, Sci-Fi",
+        genre: "Action",
         isAvailable: true,
     },
     {
         title: "Spider-man: No Way Home",
         director: "John Watts",
-        genre: "Action, Sci-Fi",
+        genre: "Action",
         isAvailable: true,
     },
     {
@@ -107,7 +107,7 @@ Movie.prototype.displayMovies = function(index) {
     movieRow.appendChild(movieGenre);
     movieRow.appendChild(movieIsAvailable);
 
-    movieTable.appendChild(movieRow);
+    movieTBody.appendChild(movieRow);
 }
 
 Customer.prototype.listRentedMovie = function() {
@@ -140,7 +140,7 @@ Customer.prototype.displayCustomer = function() {
     customerRow.appendChild(customerName);
     customerRow.appendChild(customerRented);
 
-    customerTable.appendChild(customerRow);
+    customerTBody.appendChild(customerRow);
 }
 
 const customerNames = document.querySelector("#customer-name");
@@ -170,7 +170,11 @@ const returnModalClose = document.querySelector(".return-close");
 const formReturn = document.querySelector("#form-return");
 const btnReturnMovie = document.querySelector(".btn.return-movie");
 
+const movieTBody = document.createElement("tbody");
+const customerTBody = document.createElement("tbody");
 
+movieTable.appendChild(movieTBody);
+customerTable.appendChild(customerTBody);
 // to show modal
 
 
