@@ -70,3 +70,13 @@ dialog select option {
 ::backdrop {
     background-color: rgba(0, 0, 0, .5);
 }
+
+.availability {
+    background-color: lightcoral;
+    color: darkred;
+}
+
+.available {
+    background-color: lightgreen;
+    color: darkgreen;
+}

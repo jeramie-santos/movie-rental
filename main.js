@@ -19,7 +19,7 @@ const movieList = [
     },
     {
         title: "Civil War",
-        director: "Ruso Brothers",
+        director: "Russo Brothers",
         genre: "Action, Sci-Fi",
         isAvailable: true,
     },
@@ -99,6 +99,7 @@ Movie.prototype.displayMovies = function(index) {
     const movieIsAvailable = document.createElement("td");
     movieIsAvailable.textContent = this.isAvailable ? "Yes" : "No";
     movieIsAvailable.className = "availability";
+    movieIsAvailable.classList.toggle("available");
     movieIsAvailable.value = index;
     
     movieRow.appendChild(movieTitle);
@@ -224,6 +225,7 @@ function toggleMovieAvailability(selected) {
             update.forEach(item => {
                 if (item.value == index){
                     item.textContent = movie.toggleAvailability() ? "Yes" : "No";
+                    item.classList.toggle("available");
                     rentedUpdate = true;
                 }
             })
