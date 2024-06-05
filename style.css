@@ -38,6 +38,10 @@ h1, h2 {
     color: var(--light-color);
 }
 
+h1 span {
+    color: var(--accent-color);
+}
+
 main {
     background-color: var(--secondary-color);
     display: grid;
@@ -112,7 +116,13 @@ button:hover {
 }
 
 .movie-header,
-.customer-header,
+.customer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
 .header-button {
     display: flex;
     gap: 1rem;
