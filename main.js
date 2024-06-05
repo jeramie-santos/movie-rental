@@ -89,6 +89,7 @@ Movie.prototype.displayMovies = function(index) {
 
     const movieTitle = document.createElement("td");
     movieTitle.textContent = this.title;
+    movieTitle.className = "movie-title";
 
     const movieDirector = document.createElement("td");
     movieDirector.textContent = this.director;
